@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.smirnov</groupId>
-    <artifactId>demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>tgMailBot</artifactId>
+    <version>0.0.1</version>
     <name>tgbot</name>
     <description>Demo project for Spring Boot</description>
     <url/>
