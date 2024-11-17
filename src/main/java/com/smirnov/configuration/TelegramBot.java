@@ -44,7 +44,6 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
 
-
     @Override
     public String getBotToken() {
         return botToken;
@@ -93,7 +92,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         sendMessage(message);
     }
 
-    public void sendMessageException(String exceptionMessage){
+    public void sendMessageException(String exceptionMessage) {
         SendMessage message = new SendMessage();
         message.setChatId(chatIdMail);
         message.setMessageThreadId(exceptionTopic);
