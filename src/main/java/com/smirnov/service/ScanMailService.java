@@ -85,7 +85,7 @@ public class ScanMailService {
                         messageSend = messageSend.substring(0, 4096);
                     }
                     telegramBot.sendMessageMail(messageSend);
-                    log.info("Почта просканирована");
+                    log.info("Почта проверена");
                 }
             }
             inbox.close(false);
