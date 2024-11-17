@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: tgbot
+
+
+mail:
+  imap:
+    username: ${USER_NAME}
+    password: ${PASSWORD_MAIL}
+    host: ${HOST_MAIL}
+    port: 993
+    protocol: imap
+    ssl:
+      enable: true
+
+bot:
+  name: ${BOT_NAME}
+  token: ${BOT_TOKEN}
+  сhat: ${BOT_CHAT}
+  mailTopic: ${BOT_TOPIC_MAIL}
+  exceptionTopic: ${BOT_TOPIC_EXCEPTION}}
+
+scheduled:
+  updateTime: 20
