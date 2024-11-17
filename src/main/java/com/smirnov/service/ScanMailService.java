@@ -38,6 +38,7 @@ public class ScanMailService {
     private final String protocol;
     private final boolean isEnabled;
     private final Properties properties;
+    private final String nameFolder;
 
     private final Map<Integer, LocalDateTime> cashMap = new ConcurrentHashMap<>();
 
@@ -47,7 +48,8 @@ public class ScanMailService {
                            @Value("${mail.imap.host}") String host,
                            @Value("${mail.imap.port}") int port,
                            @Value("${mail.imap.protocol}") String protocol,
-                           @Value("${mail.imap.ssl.enable}") boolean isEnabled
+                           @Value("${mail.imap.ssl.enable}") boolean isEnabled,
+                           @Value("${mail.imap.folder}") String nameFolder
     ) {
         this.telegramBot = telegramBot;
         this.host = host;
@@ -57,6 +59,7 @@ public class ScanMailService {
         this.protocol = protocol;
         this.isEnabled = isEnabled;
         this.properties = getProperties();
+        this.nameFolder = nameFolder;
     }
 
     @Scheduled(fixedRate = 20, timeUnit = SECONDS)
@@ -65,7 +68,7 @@ public class ScanMailService {
             Session session = Session.getDefaultInstance(properties, null);
             Store store = session.getStore(protocol);
             store.connect(host, login, password);
-            Folder inbox = store.getFolder("СберЗдоровье");
+            Folder inbox = store.getFolder(nameFolder);
             inbox.open(Folder.READ_ONLY);
             List<Message> messages = getMessageInbox(inbox);
             if (!messages.isEmpty()) {

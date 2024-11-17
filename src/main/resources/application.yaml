@@ -10,6 +10,7 @@ mail:
     host: ${HOST_MAIL}
     port: 993
     protocol: imap
+    folder: СберЗдоровье
     ssl:
       enable: true
 
