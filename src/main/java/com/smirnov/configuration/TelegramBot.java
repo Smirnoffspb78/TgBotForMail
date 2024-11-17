@@ -22,16 +22,26 @@ public class TelegramBot extends TelegramLongPollingBot {
      * Токен/
      */
     private final String botToken;
-    private final long chatIdMail;
+    /**
+     * Чат для отправки сообщение.
+     */
+    private final long chatId;
+
+    /**
+     * Топик для сообщений из почты
+     */
     private final Integer mailTopic;
+    /**
+     * Топик для получения сообщений об ошибках.
+     */
     private final Integer exceptionTopic;
 
     public TelegramBot(@Value("${bot.token}") String botToken,
                        @Value("${bot.name}") String botName,
-                       @Value("${bot.сhat}") long chatIdMail,
+                       @Value("${bot.сhat}") long chatId,
                        @Value("${bot.mailTopic}") Integer mailTopic,
-                       @Value("${bot.mailTopic}") Integer exceptionTopic) {
-        this.chatIdMail = chatIdMail;
+                       @Value("${bot.exceptionTopic}") Integer exceptionTopic) {
+        this.chatId = chatId;
         this.mailTopic = mailTopic;
         this.botToken = botToken;
         this.botName = botName;
@@ -86,7 +96,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     public void sendMessageMail(String text) {
         SendMessage message = new SendMessage();
-        message.setChatId(chatIdMail);
+        message.setChatId(chatId);
         message.setMessageThreadId(mailTopic);
         message.setText(text);
         sendMessage(message);
@@ -94,7 +104,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     public void sendMessageException(String exceptionMessage) {
         SendMessage message = new SendMessage();
-        message.setChatId(chatIdMail);
+        message.setChatId(chatId);
         message.setMessageThreadId(exceptionTopic);
         message.setText(exceptionMessage);
         sendMessage(message);
