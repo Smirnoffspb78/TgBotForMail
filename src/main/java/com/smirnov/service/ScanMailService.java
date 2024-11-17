@@ -108,20 +108,24 @@ public class ScanMailService {
         try {
             Message[] messagesArray = inbox.getMessages();
             LocalDateTime timeScan = LocalDateTime.now().minusSeconds(3600);
-            LocalDateTime timeMessage = timeScan.plusDays(1);
             List<Message> messages = new ArrayList<>();
-            int i = messagesArray.length - 1;
-            while (timeMessage.isAfter(timeScan)) {
-                int messageNumber = messagesArray[i].getMessageNumber();
-                if (!cashMap.containsKey(messageNumber)) {
-                    timeMessage = messagesArray[i]
-                            .getSentDate()
-                            .toInstant()
-                            .atZone(ZoneId.systemDefault())
-                            .toLocalDateTime();
-                    messages.add(messagesArray[i]);
-                    cashMap.put(messageNumber, timeMessage);
-                    i--;
+            int numMessage = messagesArray.length - 1;
+            boolean checkTime = true;
+            while (checkTime) {
+                LocalDateTime timeMessage = messagesArray[numMessage]
+                        .getSentDate()
+                        .toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDateTime();
+                if (timeMessage.isAfter(timeScan)) {
+                    int messageNumber = messagesArray[numMessage].getMessageNumber();
+                    if (!cashMap.containsKey(messageNumber)) {
+                        messages.add(messagesArray[numMessage]);
+                        cashMap.put(messageNumber, timeMessage);
+                    }
+                    numMessage--;
+                } else {
+                    checkTime = false;
                 }
             }
             return messages;
