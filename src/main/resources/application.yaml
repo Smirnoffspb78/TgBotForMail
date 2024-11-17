@@ -19,7 +19,7 @@ bot:
   token: ${BOT_TOKEN}
   сhat: ${BOT_CHAT}
   mailTopic: ${BOT_TOPIC_MAIL}
-  exceptionTopic: ${BOT_TOPIC_EXCEPTION}}
+  exceptionTopic: ${BOT_TOPIC_EXCEPTION}
 
 scheduled:
   updateTime: 20
